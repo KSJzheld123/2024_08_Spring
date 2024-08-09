@@ -36,20 +36,34 @@ public class UsrHomeController {
 
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String setArticles(int id) {
+	public String deleteArticles(int id) {
 
-		AU.articleList.remove(id - 1);
+		Article article = AU.search(id);
 
-		return id + "번 게시글 삭제";
+		if (article == null) {
+			return id + "번 게시글은 없습니다";
+		} else {
+			AU.articleList.remove(article);
+			return id + "번 게시글 삭제";
+		}
 	}
 
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public String setArticles(int id, String title, String body) {
+	public String modifyArticles(int id, String title, String body) {
 
-		AU.articleList.get(id - 1).setTitle(title);
-		AU.articleList.get(id - 1).setBody(body);
-		return id + "번 게시글 수정";
+		Article article = AU.search(id);
+
+		if (article == null) {
+			return id + "번 게시글은 없습니다";
+		} else {
+			String beforeTitle = AU.articleList.get(id - 1).getTitle();
+			String beforeBody = AU.articleList.get(id - 1).getBody();
+			AU.articleList.get(id - 1).setTitle(title);
+			AU.articleList.get(id - 1).setBody(body);
+			return id + "번 게시글 수정 / " + "수정 전 제목 : " + beforeTitle + " 수정 전 내용 : " + beforeBody + " / " + "수정 후 제목 : "
+					+ AU.articleList.get(id - 1).getTitle() + " 수정 후 내용 : " + AU.articleList.get(id - 1).getBody();
+		}
 	}
 
 }

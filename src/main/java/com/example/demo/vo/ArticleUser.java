@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class ArticleUser {
 	public static ArrayList<Article> articleList = new ArrayList();
-	public static int lastId = 10;
 
 	public ArticleUser() {
 		for (int i = 1; i <= 10; i++) {
@@ -12,4 +11,14 @@ public class ArticleUser {
 			articleList.add(articles);
 		}
 	}
+
+	public Article search(int id) {
+		for (int i = 0; i < articleList.size(); i++) {
+			if (articleList.get(i).id == id) {
+				return articleList.get(i);
+			}
+		}
+		return null;
+	}
+
 }

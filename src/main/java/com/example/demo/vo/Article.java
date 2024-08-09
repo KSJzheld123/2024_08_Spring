@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Article {
-	int id;
-	String title;
-	String body;
+	public int id;
+	public String title;
+	public String body;
 }

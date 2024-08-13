@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,18 +21,11 @@ public class UsrArticleController {
 	@Autowired
 	private ArticleService articleService;
 
-	@RequestMapping("/usr/article/getArticle")
-	@ResponseBody
-	public ResultData<Article> getArticle(int id) {
-
+	@RequestMapping("/usr/article/detail")
+	public String getArticle(int id, Model model) {
 		Article article = articleService.getArticleById(id);
-
-		if (article == null) {
-			return ResultData.from("F-1", Ut.f("%d번 게시글은 없습니다.", id));
-
-		}
-
-		return ResultData.from("S-1", Ut.f("%d번 게시글 입니다", id), article);
+		model.addAttribute("article", article);
+		return "usr/article/detail";
 	}
 
 	@RequestMapping("/usr/article/doModify")
@@ -55,6 +49,10 @@ public class UsrArticleController {
 		
 		if (article == null) {
 			return ResultData.from("F-1", Ut.f("%d번 게시글은 없습니다", id));
+		}
+		
+		if (article.getMemberId() != loginedMemberId) {
+			return ResultData.from("F-A", Ut.f("%d번 글은 수정할 권한이 없습니다", id));
 		}
 
 		articleService.modifyArticle(id, title, body);
@@ -127,11 +125,14 @@ public class UsrArticleController {
 		return ResultData.newData(writeArticleRd, article);
 	}
 
-	@RequestMapping("/usr/article/getArticles")
-	@ResponseBody
-	public ResultData<List<Article>> getArticles() {
+	@RequestMapping("/usr/article/list")
+	public String showList(Model model) {
+
 		List<Article> articles = articleService.getArticles();
-		return ResultData.from("S-1", "Article List", articles);
+
+		model.addAttribute("articles", articles);
+
+		return "usr/article/list";
 	}
 
 }

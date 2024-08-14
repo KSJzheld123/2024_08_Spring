@@ -18,7 +18,7 @@
 				<th style="text-align: center;">UpdateDate</th>
 				<th style="text-align: center;">Title</th>
 				<th style="text-align: center;">body</th>
-				<th style="text-align: center;">Member ID</th>
+				<th style="text-align: center;">Member Name</th>
 			</tr>
 		</thead>
 		<tbody>

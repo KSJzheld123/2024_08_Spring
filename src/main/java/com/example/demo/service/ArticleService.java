@@ -24,8 +24,8 @@ public class ArticleService {
 		this.articleRepository = articleRepository;
 	}
 
-	public ResultData writeArticle(int memberId, String title, String body) {
-		articleRepository.writeArticle(memberId, title, body);
+	public ResultData writeArticle(int memberId, String title, String body, String memberName) {
+		articleRepository.writeArticle(memberId, title, body, memberName);
 
 		int id = articleRepository.getLastInsertId();
 
@@ -36,12 +36,11 @@ public class ArticleService {
 		articleRepository.deleteArticle(id);
 	}
 
-	public void modifyArticle(int id, String title, String body) {
-		articleRepository.modifyArticle(id, title, body);
+	public void modifyArticle(int id, String title, String body, String updateDate) {
+		articleRepository.modifyArticle(id, title, body, updateDate);
 	}
 
 	public Article getArticleById(int id) {
-
 		return articleRepository.getArticleById(id);
 	}
 

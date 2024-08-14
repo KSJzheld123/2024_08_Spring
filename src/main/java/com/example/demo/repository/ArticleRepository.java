@@ -12,13 +12,13 @@ import com.example.demo.vo.Article;
 public interface ArticleRepository {
 
 //	@Insert("INSERT INTO article SET regDate = NOW(), updateDate = NOW(), title = #{title}, `body` = #{body}")
-	public void writeArticle(int memberId, String title, String body);
+	public void writeArticle(int memberId, String title, String body, String memberName);
 
 	@Delete("DELETE FROM article WHERE id = #{id}")
 	public void deleteArticle(int id);
 
 //	@Update("UPDATE article SET updateDate = NOW(), title = #{title}, `body` = #{body} WHERE id = #{id}")
-	public void modifyArticle(int id, String title, String body);
+	public void modifyArticle(int id, String title, String body, String updateDate);
 
 //	@Select("SELECT * FROM article WHERE id = #{id}")
 	public Article getArticleById(int id);
@@ -28,4 +28,5 @@ public interface ArticleRepository {
 
 	@Select("SELECT LAST_INSERT_ID();")
 	public int getLastInsertId();
+
 }

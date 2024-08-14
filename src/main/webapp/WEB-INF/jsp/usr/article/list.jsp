@@ -16,7 +16,7 @@
 				<th style="text-align: center;">ID</th>
 				<th style="text-align: center;">Registration Date</th>
 				<th style="text-align: center;">Title</th>
-				<th style="text-align: center;">Member ID</th>
+				<th style="text-align: center;">Member Name</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -27,7 +27,13 @@
 					<td style="text-align: center;">
 						<a href="detail?id=${article.id}">${article.title}</a>
 					</td>
-					<td style="text-align: center;">${article.memberId}</td>
+					<td style="text-align: center;">${article.memberName}</td>
+					<td>
+						<a class="login" href="modify?id=${article.id}">수정</a>
+					</td>
+					<td>
+						<a class="login" href="delete?id=${article.id}">삭제</a>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
